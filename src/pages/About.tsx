@@ -3,151 +3,138 @@ import { ArrowRight } from 'lucide-react'
 import SEOHead from '../components/SEOHead'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
-// Curated Unsplash images for the about page
-const HERO_WIDE   = 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1800&q=80&auto=format&fit=crop'
-const INTERIOR_1  = 'https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=900&q=80&auto=format&fit=crop'
-const INTERIOR_2  = 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=900&q=80&auto=format&fit=crop'
-const BARISTA_IMG = 'https://images.unsplash.com/photo-1516664631854-53aa6a5fc6e2?w=800&q=80&auto=format&fit=crop'
-const LATTE_IMG   = 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80&auto=format&fit=crop'
+const IMG = {
+  hero:      '/720417232_17890662507550537_4600229101300576405_n.jpg',
+  interior1: '/721387579_17890662453550537_6470382880018086177_n.jpg',
+  interior2: '/622290320_17939322795126663_8863688168724775314_n.jpg',
+  coffee1:   '/622224497_17939322777126663_3451149241024676410_n.jpg',
+  food:      '/622613243_17939322804126663_377302319621215862_n.jpg',
+}
 
 const spaceDetails = [
-  {
-    num: '01',
-    heading: 'Tactile Surfaces',
-    body: 'Every surface — from fluted plaster to open-pore oak — is chosen to ground the senses and invite the hands.',
-  },
-  {
-    num: '02',
-    heading: 'Living Light',
-    body: 'Lighting follows the natural arc of the day, softening as the morning rush yields to afternoon reflection.',
-  },
-  {
-    num: '03',
-    heading: 'Intentional Quiet',
-    body: 'Music is curated, volume kept low. The ambient sound of a good cafe should never compete with conversation.',
-  },
-  {
-    num: '04',
-    heading: 'The Long Table',
-    body: 'Our communal table is an invitation. Solo workers, groups of friends, strangers sharing an afternoon — all welcome.',
-  },
+  { num: '01', heading: 'Tactile Surfaces',  body: 'From fluted plaster to open-pore oak — every surface is chosen to ground the senses and make you want to stay.' },
+  { num: '02', heading: 'Living Light',      body: 'Natural light shapes the mood throughout the day. Mornings are bright and energising. Afternoons soften into amber.' },
+  { num: '03', heading: 'Intentional Quiet', body: 'Music is curated, volume is low. The ambient sound of a good café should never compete with a good conversation.' },
+  { num: '04', heading: 'Two Floors',        body: 'Ground floor buzz or second-floor calm — pick your pace. Both floors have power sockets and fast Wi-Fi.' },
 ]
 
 export default function About() {
   const revealA = useScrollReveal() as React.RefObject<HTMLDivElement>
   const revealB = useScrollReveal() as React.RefObject<HTMLDivElement>
-  const revealC = useScrollReveal() as React.RefObject<HTMLDivElement>
 
   return (
     <>
       <SEOHead
-        title="About Sable | Our Space & Philosophy"
-        description="Sable is an architectural cafe designed as an urban oasis. Learn about our space, our philosophy of intentional lingering, and what makes Sable different."
+        title="About Sable | New Manila's Architectural Café — Broadway Ave, QC"
+        description="Sable is a specialty café on Broadway Ave, New Manila, designed for the conscious lingerer. Direct-trade coffee, fresh daily food, two floors of thoughtfully designed space."
         path="/about"
       />
 
-      {/* ── HERO — horizontal split, image left ─────────────── */}
+      {/* ── HERO ─────────────────────────────────────────── */}
       <section
-        className="min-h-[85vh] grid grid-cols-1 md:grid-cols-2"
-        aria-labelledby="about-page-heading"
+        className="grid grid-cols-1 md:grid-cols-2 min-h-[82vh] md:min-h-[88vh]"
+        aria-labelledby="about-heading"
       >
-        {/* Left — full image */}
-        <div className="relative h-72 md:h-auto overflow-hidden">
+        <div className="relative h-64 sm:h-80 md:h-auto overflow-hidden">
           <img
-            src={HERO_WIDE}
-            alt="Sable Cafe interior — warm light through architectural windows"
+            src={IMG.hero}
+            alt="Sable Cafe — warm architectural interior, Broadway Ave New Manila"
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager"
+            fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-deep-forest/20" />
+          {/* Top vignette keeps transparent navbar text legible */}
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-deep-forest/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-deep-forest/25 md:bg-gradient-to-r md:from-transparent md:to-deep-forest/15" />
         </div>
-
-        {/* Right — text on cream */}
-        <div className="bg-deep-forest flex flex-col justify-center px-8 md:px-14 py-16 md:py-0">
-          <p className="label-caps text-sage mb-6">The Spatial Narrative</p>
+        <div className="bg-deep-forest flex flex-col justify-center px-8 md:px-10 lg:px-14 py-12 md:py-0">
+          <p className="label-caps text-sage mb-4 tracking-[0.22em] text-[0.55rem]">
+            New Manila, QC · Est. 2025
+          </p>
           <h1
-            id="about-page-heading"
-            className="font-display italic text-cream text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-8"
+            id="about-heading"
+            className="font-display italic text-cream text-[clamp(2.4rem,4.5vw,4rem)] leading-[1.05] mb-6"
           >
-            The Quiet<br />
-            Art of<br />
-            <span className="text-sage">Lingering.</span>
+            The quiet<br />art of<br />
+            <span className="text-sage">lingering.</span>
           </h1>
-          <p className="text-cream/60 text-sm leading-relaxed font-body max-w-sm">
-            Sable opened in 2024 with a single idea: a cafe should be a place you want to
-            <em className="text-cream/80 not-italic font-medium"> stay</em>, not just a place to grab coffee.
-            We designed every detail of the space to earn that extra hour.
+          <p className="text-cream/50 text-sm leading-[1.9] font-body max-w-[280px]">
+            Sable opened in 2025 with one idea — a café should earn the extra hour.
+            Not with loyalty points or loud playlists, but with a space so thoughtfully
+            made you simply don't want to leave.
           </p>
         </div>
       </section>
 
-      {/* ── STORY STRIP — thin editorial row ────────────────── */}
-      <div className="bg-forest py-10 px-6 md:px-14">
-        <div className="max-w-8xl mx-auto flex flex-col md:flex-row gap-8 md:gap-0 md:divide-x divide-sage/10">
-          {[
-            { label: 'Founded',  value: '2024' },
-            { label: 'Location', value: 'Philippines' },
-            { label: 'Hours',    value: '7AM – 6PM' },
-            { label: 'Vibe',     value: 'Stay awhile' },
-          ].map(({ label, value }) => (
-            <div key={label} className="flex-1 md:px-10 first:pl-0 last:pr-0">
-              <p className="label-caps text-sage/50 mb-1">{label}</p>
-              <p className="font-display italic text-cream text-xl">{value}</p>
-            </div>
-          ))}
+      {/* ── STRIP STATS ──────────────────────────────────── */}
+      <div className="bg-forest border-y border-sage/10">
+        <div className="max-w-5xl mx-auto px-6 md:px-14 py-7 md:py-9">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-0 md:divide-x divide-sage/10">
+            {[
+              { label: 'Address', value: '66B Broadway Ave' },
+              { label: 'Founded', value: '2025' },
+              { label: 'Rating',  value: '4.6 ★ Google' },
+              { label: 'Parking', value: 'Free, across street' },
+            ].map(({ label, value }) => (
+              <div key={label} className="md:px-8 first:md:pl-0 last:md:pr-0">
+                <p className="label-caps text-sage/40 mb-1 text-[0.5rem]">{label}</p>
+                <p className="font-display italic text-cream text-base leading-tight">{value}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* ── SPACE DETAILS — image + copy alternating ─────────── */}
+      {/* ── SPACE DETAILS ────────────────────────────────── */}
       <section
         ref={revealA}
-        className="py-24 md:py-36 px-6 md:px-14"
-        aria-labelledby="space-details-heading"
+        className="py-16 md:py-24 px-6 md:px-14"
+        aria-labelledby="space-heading"
       >
-        <div className="max-w-8xl mx-auto">
-          {/* Section header */}
-          <div className="mb-16 max-w-lg reveal">
-            <p className="label-caps text-sage mb-4">How the Space Works</p>
+        <div className="max-w-5xl mx-auto">
+
+          <div className="mb-10 md:mb-14 reveal">
+            <p className="label-caps text-sage mb-2.5 text-[0.55rem]">How the Space Works</p>
             <h2
-              id="space-details-heading"
-              className="font-display italic text-forest text-4xl md:text-5xl leading-tight"
+              id="space-heading"
+              className="font-display italic text-forest text-[clamp(1.6rem,3.5vw,2.6rem)] leading-tight"
             >
               Every detail<br />is deliberate.
             </h2>
           </div>
 
-          {/* Two-column detail grid beside a tall image */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Details grid */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-start">
+
+            {/* Detail cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-7">
               {spaceDetails.map(({ num, heading, body }, i) => (
                 <article
                   key={num}
-                  className="reveal border-t border-forest/10 pt-8"
-                  style={{ transitionDelay: `${i * 80}ms` }}
+                  className="reveal border-t border-forest/10 pt-5"
+                  style={{ transitionDelay: `${i * 65}ms` }}
                 >
-                  <span className="label-caps text-sage/40 block mb-4">{num}</span>
-                  <h3 className="font-display italic text-forest text-xl mb-3">{heading}</h3>
-                  <p className="text-slate text-sm leading-relaxed font-body">{body}</p>
+                  <span className="label-caps text-sage/35 block mb-2.5 text-[0.5rem]">{num}</span>
+                  <h3 className="font-display italic text-forest text-base md:text-lg mb-2">{heading}</h3>
+                  <p className="text-slate text-sm leading-[1.8] font-body">{body}</p>
                 </article>
               ))}
             </div>
 
-            {/* Tall stacked images */}
-            <div className="lg:col-span-5 flex flex-col gap-4 reveal">
+            {/* Two interior photos */}
+            <div className="lg:col-span-5 flex flex-col gap-2.5 reveal">
               <div className="overflow-hidden aspect-[4/3]">
                 <img
-                  src={INTERIOR_1}
-                  alt="Sable Cafe — warm interior light and wooden surfaces"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  src={IMG.interior1}
+                  alt="Sable Cafe second floor — calm seating with architectural windows"
+                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
               <div className="overflow-hidden aspect-[4/3]">
                 <img
-                  src={INTERIOR_2}
-                  alt="Sable Cafe — architectural window frames and ambient light"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  src={IMG.interior2}
+                  alt="Sable Cafe ground floor — warm light and tactile surfaces"
+                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
@@ -156,105 +143,96 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── PULL QUOTE — full cream-dark band ───────────────── */}
-      <div className="bg-cream-dark border-y border-forest/8 py-20 md:py-28 px-6 md:px-14">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="font-display text-6xl text-sage/20 leading-none mb-4 select-none" aria-hidden>&ldquo;</div>
+      {/* ── PULL QUOTE ───────────────────────────────────── */}
+      <div className="bg-cream-dark border-y border-forest/8 py-14 md:py-20 px-6 md:px-14">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="font-display text-5xl text-sage/15 leading-none mb-4 select-none" aria-hidden>
+            &ldquo;
+          </div>
           <blockquote>
-            <p className="font-display italic text-forest text-2xl md:text-4xl leading-snug mb-8">
-              Luxury is found in the absence of noise and the presence of intention.
+            <p className="font-display italic text-forest text-[clamp(1.2rem,2.5vw,2rem)] leading-snug mb-5">
+              Luxury is found in the absence of noise<br className="hidden md:block" />
+              and the presence of intention.
             </p>
-            <cite className="label-caps text-slate not-italic">— Sable Foundation Principle</cite>
+            <cite className="label-caps text-slate/55 not-italic text-[0.55rem]">
+              — Sable Foundation Principle
+            </cite>
           </blockquote>
         </div>
       </div>
 
-      {/* ── PILLARS — barista + latte side by side + copy ────── */}
+      {/* ── PILLARS ──────────────────────────────────────── */}
       <section
         ref={revealB}
-        className="py-24 md:py-36 px-6 md:px-14 bg-deep-forest text-cream"
-        aria-label="What we stand for"
+        className="py-16 md:py-24 px-6 md:px-14 bg-deep-forest text-cream"
+        aria-label="Our commitments"
       >
-        <div className="max-w-8xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-20">
-            {/* Text */}
+        <div className="max-w-5xl mx-auto">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center mb-12 md:mb-16">
             <div className="reveal">
-              <p className="label-caps text-sage mb-5">What We Stand For</p>
-              <h2 className="font-display italic text-cream text-4xl md:text-5xl leading-tight mb-6">
-                Three things<br />we never<br />compromise on.
+              <p className="label-caps text-sage mb-4 text-[0.55rem]">What We Don't Compromise On</p>
+              <h2 className="font-display italic text-cream text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] mb-5">
+                Coffee. Food.<br />Space. In that order.
               </h2>
-              <p className="text-cream/50 text-sm leading-relaxed font-body">
-                Coffee, food, and space. Get all three right and you don't need a gimmick.
+              <p className="text-cream/45 text-sm leading-[1.85] font-body max-w-[280px]">
+                Get all three right and you don't need a gimmick.
+                Every decision at Sable starts from that principle.
               </p>
             </div>
 
-            {/* Side-by-side photos */}
-            <div className="grid grid-cols-2 gap-4 reveal">
+            {/* Offset photo pair */}
+            <div className="grid grid-cols-2 gap-2.5 reveal">
               <div className="overflow-hidden aspect-[3/4]">
                 <img
-                  src={BARISTA_IMG}
-                  alt="Sable barista carefully preparing a pour-over coffee"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  src={IMG.coffee1}
+                  alt="Sable specialty coffee — carefully crafted espresso drink"
+                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
-              <div className="overflow-hidden aspect-[3/4] mt-8">
+              <div className="overflow-hidden aspect-[3/4] mt-6 md:mt-10">
                 <img
-                  src={LATTE_IMG}
-                  alt="Freshly made latte with latte art at Sable"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  src={IMG.food}
+                  alt="Sable kitchen — fresh brunch plate prepared daily"
+                  className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
             </div>
           </div>
 
-          {/* Three pillar cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-sage/10" ref={revealC}>
+          {/* Three pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-sage/10">
             {[
-              {
-                label: 'Coffee',
-                heading: 'Specialty, always.',
-                body: 'Direct-trade beans, pulled to order. Not pre-brewed, not sitting in a carafe. Just the ritual of a properly made cup.',
-              },
-              {
-                label: 'Food',
-                heading: 'Made daily.',
-                body: 'Brunch plates prepared fresh each morning. Bakes come out of the oven early — and when they are gone, they are gone.',
-              },
-              {
-                label: 'Space',
-                heading: 'Designed to stay.',
-                body: 'Good Wi-Fi, plentiful outlets, and no one rushing you out the door. The table is yours for as long as you need it.',
-              },
+              { label: 'Coffee', heading: 'Specialty, always.', body: 'Direct-trade beans, fruity or chocolatey roast — your call. Pulled to order, every single time. No shortcuts.' },
+              { label: 'Food',   heading: 'Made daily.',        body: "Brunch plates prepared fresh each morning. Bakes from the oven early. When they're gone, they're gone." },
+              { label: 'Space',  heading: 'Designed to stay.',  body: 'Fast Wi-Fi, power sockets at every seat, two floors of seating. The table is yours for as long as you need.' },
             ].map(({ label, heading, body }, i) => (
               <article
                 key={label}
-                className="reveal p-8 md:p-10 border-b md:border-b-0 md:border-r border-sage/10 last:border-0"
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className="reveal p-6 md:p-8 border-b md:border-b-0 md:border-r border-sage/10 last:border-0"
+                style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <p className="label-caps text-sage mb-5">{label}</p>
-                <h3 className="font-display italic text-cream text-2xl mb-4">{heading}</h3>
-                <p className="text-cream/50 text-sm leading-relaxed font-body">{body}</p>
+                <p className="label-caps text-sage mb-3 text-[0.5rem]">{label}</p>
+                <h3 className="font-display italic text-cream text-lg md:text-xl mb-2.5">{heading}</h3>
+                <p className="text-cream/45 text-xs md:text-sm leading-[1.8] font-body">{body}</p>
               </article>
             ))}
           </div>
 
-          {/* CTAs */}
-          <div className="mt-14 flex flex-col sm:flex-row gap-4 reveal">
+          <div className="mt-10 flex flex-col sm:flex-row gap-2.5 reveal">
             <Link
               to="/menu"
-              className="inline-flex items-center justify-center gap-2 label-caps bg-sage text-forest px-8 py-4 hover:bg-sage-light transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2 label-caps bg-sage text-forest px-6 py-3.5 hover:bg-sage-light transition-colors duration-300"
             >
-              View Full Menu
-              <ArrowRight size={14} strokeWidth={1.5} />
+              View Full Menu <ArrowRight size={12} strokeWidth={1.5} />
             </Link>
             <Link
               to="/visit"
-              className="inline-flex items-center justify-center gap-2 label-caps text-cream border border-cream/20 px-8 py-4 hover:border-cream transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2 label-caps text-cream border border-cream/15 px-6 py-3.5 hover:border-cream/40 transition-colors duration-300"
             >
-              Plan Your Visit
-              <ArrowRight size={14} strokeWidth={1.5} />
+              Plan Your Visit <ArrowRight size={12} strokeWidth={1.5} />
             </Link>
           </div>
         </div>

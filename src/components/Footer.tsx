@@ -1,18 +1,10 @@
 import { Link } from 'react-router-dom'
 import { MapPin, Clock } from 'lucide-react'
 
-// Instagram icon (not available in this version of lucide-react)
 function InstagramIcon({ size = 14, strokeWidth = 1.5 }: { size?: number; strokeWidth?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"
     >
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
       <circle cx="12" cy="12" r="4" />
@@ -22,39 +14,51 @@ function InstagramIcon({ size = 14, strokeWidth = 1.5 }: { size?: number; stroke
 }
 
 const navLinks = [
-  { label: 'Menu',    path: '/menu'  },
-  { label: 'About',   path: '/about' },
-  { label: 'Visit',   path: '/visit' },
+  { label: 'Menu',  path: '/menu'  },
+  { label: 'About', path: '/about' },
+  { label: 'Visit', path: '/visit' },
 ]
 
 export default function Footer() {
   return (
     <footer className="bg-deep-forest text-cream" role="contentinfo">
-      {/* Main grid */}
-      <div className="max-w-8xl mx-auto px-5 md:px-10 pt-16 pb-10">
+      <div className="max-w-8xl mx-auto px-6 md:px-14 pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-sage/10 pb-14">
 
-          {/* Brand column */}
+          {/* Brand */}
           <div className="md:col-span-5">
-            <img
-              src="/sable-logo.png"
-              alt="Sable"
-              className="h-10 w-auto brightness-0 invert mb-6"
-            />
-            <p className="text-cream/60 text-sm leading-relaxed max-w-xs font-body">
-              An architectural cafe designed for lingering. Handcrafted coffee, comforting meals,
-              and fresh bakes served daily.
+            <div className="flex items-center gap-3 mb-6">
+              <img
+                src="/sable-logo.jpg"
+                alt="Sable Cafe logo"
+                className="h-12 w-12 object-cover rounded-sm flex-shrink-0"
+              />
+            </div>
+            <p className="text-cream/60 text-sm leading-relaxed max-w-xs font-body mb-6">
+              Specialty coffee, all-day brunch, and fresh bakes on Broadway Ave, New Manila.
+              A space built for slow mornings and long afternoons.
             </p>
-            <a
-              href="https://instagram.com/sablecafe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 text-sage hover:text-cream transition-colors label-caps"
-              aria-label="Sable on Instagram"
-            >
-              <InstagramIcon size={14} strokeWidth={1.5} />
-              @sablecafe
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/sable.mnl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sage hover:text-cream transition-colors label-caps"
+                aria-label="Sable on Instagram"
+              >
+                <InstagramIcon size={14} strokeWidth={1.5} />
+                @sable.mnl
+              </a>
+              <span className="text-sage/20">·</span>
+              <a
+                href="https://maps.google.com/?q=Sable+Cafe+66B+Broadway+Ave+Quezon+City"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label-caps text-sage/60 hover:text-sage transition-colors"
+              >
+                4.6 ★ Google
+              </a>
+            </div>
           </div>
 
           {/* Navigate */}
@@ -77,17 +81,17 @@ export default function Footer() {
           {/* Location & Hours */}
           <div className="md:col-span-4">
             <p className="label-caps text-sage mb-5">Location & Hours</p>
-            <div className="flex items-start gap-3 mb-4">
+            <div className="flex items-start gap-3 mb-5">
               <MapPin size={14} className="text-sage mt-0.5 flex-shrink-0" strokeWidth={1.5} />
               <address className="not-italic text-cream/60 text-sm font-body leading-relaxed">
-                {/* Update with real address */}
-                Sable Cafe<br />
-                Philippines
+                66B Broadway Ave, Mariana<br />
+                Quezon City, 1112<br />
+                Metro Manila, Philippines
               </address>
             </div>
             <div className="flex items-start gap-3">
               <Clock size={14} className="text-sage mt-0.5 flex-shrink-0" strokeWidth={1.5} />
-              <div className="text-cream/60 text-sm font-body">
+              <div className="text-cream/60 text-sm font-body space-y-1">
                 <p>Mon – Fri: 7:00 AM – 6:00 PM</p>
                 <p>Sat – Sun: 8:00 AM – 4:00 PM</p>
               </div>
@@ -101,7 +105,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Sable Cafe. All rights reserved.
           </p>
           <p className="label-caps text-cream/20">
-            Designed for Lingering
+            Designed for Lingering — New Manila, QC
           </p>
         </div>
       </div>

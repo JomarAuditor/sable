@@ -3,6 +3,10 @@ import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.tsx'
+import { enableImageProtection } from './utils/protectImages'
+
+// Block right-click save / drag-to-desktop on all images
+enableImageProtection()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

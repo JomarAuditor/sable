@@ -7,24 +7,35 @@ interface MenuSectionProps {
 
 export default function MenuSection({ category }: MenuSectionProps) {
   return (
+    /*
+     * The `reveal` class must be on a CHILD of the useScrollReveal container,
+     * not on the container itself. The section wrapper is plain — the inner
+     * content card carries `reveal` so IntersectionObserver can trigger it.
+     */
     <section
       id={`section-${category.id}`}
-      className="mb-14 reveal"
+      className="mb-12 md:mb-16"
       aria-labelledby={`heading-${category.id}`}
     >
-      <div className="flex items-center gap-4 mb-6">
+      {/* Section heading + hairline */}
+      <div className="flex items-center gap-4 mb-5 reveal">
         <h2
           id={`heading-${category.id}`}
-          className="font-display italic text-forest text-2xl md:text-3xl whitespace-nowrap"
+          className="font-display italic text-forest text-xl md:text-2xl lg:text-3xl leading-none whitespace-nowrap flex-shrink-0"
         >
           {category.heading}
         </h2>
         <div className="flex-1 hairline" />
       </div>
 
-      <div className="bg-warm-white border border-forest/6 p-6 md:p-8">
-        {category.items.map((item) => (
-          <MenuCard key={item.id} item={item} />
+      {/* Menu items card */}
+      <div className="bg-warm-white border border-forest/6 px-5 sm:px-6 md:px-8 reveal">
+        {category.items.map((item, index) => (
+          <MenuCard
+            key={item.id}
+            item={item}
+            isLast={index === category.items.length - 1}
+          />
         ))}
       </div>
     </section>

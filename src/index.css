@@ -159,6 +159,22 @@
   width: max-content;
 }
 
+/* ── Image protection ───────────────────────────────── */
+/* Prevent right-click save, drag, iOS long-press save   */
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;  /* iOS Safari long-press menu */
+  pointer-events: none;         /* disables drag & right-click at CSS level */
+}
+
+/* Re-enable pointer events only on interactive images (links) */
+a img,
+button img {
+  pointer-events: auto;
+}
+
 /* ── Reduced motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
