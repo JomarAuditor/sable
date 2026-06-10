@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand Colors ────────────────────────────────── */
+  --color-forest:      #003521;
+  --color-mid-forest:  #004a2e;
+  --color-deep-forest: #002b1b;
+  --color-cream:       #fbf9f5;
+  --color-cream-dark:  #f3efe8;
+  --color-warm-white:  #ffffff;
+  --color-sage:        #96d4b2;
+  --color-sage-light:  #b0dfc4;
+  --color-slate:       #59605d;
+  --color-gold:        #fabc4c;
+
+  /* ── Typography ──────────────────────────────────── */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body:    "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* ── Font Sizes ──────────────────────────────────── */
+  --font-size-2xs: 0.625rem;
+  --line-height-2xs: 1rem;
+
+  /* ── Max Width ───────────────────────────────────── */
+  --container-8xl: 88rem;
+
+  /* ── Easing ──────────────────────────────────────── */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base styles ────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-forest);
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-sage) 30%, transparent);
+    color: var(--color-forest);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Component styles ───────────────────────────────── */
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Label caps — eyebrow labels, nav items */
+  .label-caps {
+    font-family: var(--font-body);
+    font-size: var(--font-size-2xs);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Iron-frame window border — signature design element */
+  .window-frame {
+    border: 1px solid color-mix(in srgb, var(--color-forest) 10%, transparent);
+    position: relative;
+  }
+
+  .window-frame::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid color-mix(in srgb, var(--color-forest) 5%, transparent);
+    pointer-events: none;
+  }
+
+  /* Dotted leader line */
+  .leader-line {
+    flex-grow: 1;
+    border-bottom: 1px dotted currentColor;
+    margin: 0 8px 3px 8px;
+    opacity: 0.2;
+  }
+
+  /* Amber glow */
+  .amber-glow {
+    box-shadow: 0 0 60px 20px rgba(250, 188, 76, 0.08);
+  }
+
+  /* Scroll reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 700ms var(--ease-expo), transform 700ms var(--ease-expo);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Utility styles ─────────────────────────────────── */
+@layer utilities {
+  .text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .hairline {
+    height: 1px;
+    width: 100%;
+    background-color: color-mix(in srgb, var(--color-forest) 10%, transparent);
+  }
+
+  .grayscale-hover {
+    filter: grayscale(1);
+    transition: filter 700ms;
+  }
+
+  .grayscale-hover:hover {
+    filter: grayscale(0);
+  }
+
+  .ease-expo {
+    transition-timing-function: var(--ease-expo);
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .max-w-8xl {
+    max-width: 88rem;
+  }
+}
+
+/* ── Marquee animation ──────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+
+/* ── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
